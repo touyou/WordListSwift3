@@ -21,16 +21,16 @@ class ViewController: UIViewController {
     }
 
     
-    @IBAction func back (segue:UIStoryboardSegue){
+    @IBAction func back (_ segue:UIStoryboardSegue){
         
     }
     
     @IBAction func startButtonTapped(){
-        let saveData = NSUserDefaults.standardUserDefaults()
+        let saveData = UserDefaults.standard
         
-        if let wordArray = saveData.arrayForKey("WORD"){
+        if let wordArray = saveData.array(forKey: "WORD"){
             if wordArray.count > 0 {
-                self.performSegueWithIdentifier("toQuestionView", sender: nil)
+                self.performSegue(withIdentifier: "toQuestionView", sender: nil)
                 return
             }
         }
@@ -38,17 +38,17 @@ class ViewController: UIViewController {
         let alert: UIAlertController = UIAlertController(
             title: "単語",
             message: "まずは「単語一覧」をタップして、単語登録してください",
-            preferredStyle: .Alert
+            preferredStyle: .alert
         )
         
         alert.addAction(UIAlertAction(
             title: "OK",
-            style: .Default,
+            style: .default,
             handler: nil
             )
         )
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
 
 }
