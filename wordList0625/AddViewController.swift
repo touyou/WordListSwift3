@@ -21,7 +21,7 @@ class AddViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         if saveData.object(forKey: "WORD") != nil {
-            wordArray = saveData.object(forKey: "WORD") as! Array
+            wordArray = saveData.object(forKey: "WORD") as! [Dictionary<String, String>]
         }
     }
 

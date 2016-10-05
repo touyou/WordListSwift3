@@ -15,7 +15,7 @@ class QuestionViewController: UIViewController {
     @IBOutlet weak var answerLabel:UILabel!
     
     var isAnswered: Bool = false
-    var wordArray = [Any]()
+    var wordArray = [Dictionary<String, String>]()
     var shuffledWordArray = [Dictionary<String, String>]()
     var nowNumber: Int = 0
     
@@ -29,9 +29,9 @@ class QuestionViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        wordArray = saveData.array(forKey: "WORD")!
+        wordArray = saveData.array(forKey: "WORD") as! [Dictionary<String, String>]
         shuffle()
-        questionLabel.text = shuffledWordArray[nowNumber]["english"]!
+        questionLabel.text = shuffledWordArray[nowNumber]["english"]
     }
     
 
@@ -44,7 +44,7 @@ class QuestionViewController: UIViewController {
     func shuffle(){
         while wordArray.count > 0 {
             let index = Int(arc4random()) % wordArray.count
-            shuffledWordArray.append(wordArray[index] as! Dictionary<String, String>)
+            shuffledWordArray.append(wordArray[index])
             wordArray.remove(at: index)
         }
     }
@@ -56,7 +56,7 @@ class QuestionViewController: UIViewController {
             answerLabel.text = ""
             
             if nowNumber < shuffledWordArray.count {
-                questionLabel.text = shuffledWordArray[nowNumber]["english"]!
+                questionLabel.text = shuffledWordArray[nowNumber]["english"]
                 isAnswered = false
                 
                 nextButton.setTitle("答えを表示", for: UIControlState())
@@ -65,7 +65,7 @@ class QuestionViewController: UIViewController {
                 self.performSegue(withIdentifier: "toFinishView", sender: nil)
             }
         }else{
-            answerLabel.text = shuffledWordArray[nowNumber]["japanese"]!
+            answerLabel.text = shuffledWordArray[nowNumber]["japanese"]
             isAnswered = true
             nextButton.setTitle("次へ", for: UIControlState())
         }

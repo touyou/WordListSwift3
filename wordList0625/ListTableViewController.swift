@@ -10,7 +10,7 @@ import UIKit
 
 class ListTableViewController: UITableViewController {
     
-    var wordArray = [Any]()
+    var wordArray = [Dictionary<String, String>]()
     let saveData = UserDefaults.standard
 
     override func viewDidLoad() {
@@ -29,7 +29,7 @@ class ListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         if saveData.array(forKey: "WORD") != nil {
-            wordArray = saveData.array(forKey: "WORD")!
+            wordArray = saveData.array(forKey: "WORD") as! [Dictionary<String, String>]
         }
         tableView.reloadData()
     }
@@ -54,9 +54,9 @@ class ListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
         
-        let nowIndexPathDictionary = wordArray[indexPath.row] as! Dictionary<String, String>
-        cell.englishLabel.text = nowIndexPathDictionary["english"] ?? ""
-        cell.japaneseLabel.text = nowIndexPathDictionary["japanese"] ?? ""
+        let nowIndexPathDictionary = wordArray[indexPath.row]
+        cell.englishLabel.text = nowIndexPathDictionary["english"]
+        cell.japaneseLabel.text = nowIndexPathDictionary["japanese"]
         
         return cell
     }
