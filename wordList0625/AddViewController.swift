@@ -10,8 +10,8 @@ import UIKit
 
 class AddViewController: UIViewController {
     
-    @IBOutlet weak var englishTextField:UITextField!
-    @IBOutlet weak var japaneseTextField:UITextField!
+    @IBOutlet var englishTextField: UITextField!
+    @IBOutlet var japaneseTextField: UITextField!
     
     var wordArray = [Dictionary<String, String>]()
     var saveData = UserDefaults.standard
@@ -31,14 +31,14 @@ class AddViewController: UIViewController {
     }
     
     
-    @IBAction func saveWord(){
-        let wordDictionary = ["english":englishTextField.text!, "japanese":japaneseTextField.text!]
+    @IBAction func saveWord() {
+        let wordDictionary = ["english": englishTextField.text!, "japanese": japaneseTextField.text!]
         wordArray.append(wordDictionary)
         saveData.set(wordArray, forKey: "WORD")
         
         let alert = UIAlertController(
             title: "保存完了",
-            message:  "単語の登録が完了しました",
+            message: "単語の登録が完了しました",
             preferredStyle: UIAlertControllerStyle.alert
         )
         alert.addAction(
@@ -49,7 +49,7 @@ class AddViewController: UIViewController {
             )
         )
         
-        self.present(alert,animated:true, completion:nil)
+        self.present(alert, animated: true, completion: nil)
         englishTextField.text = ""
         japaneseTextField.text = ""
     }

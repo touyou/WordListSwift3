@@ -10,9 +10,9 @@ import UIKit
 
 class QuestionViewController: UIViewController {
     
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var questionLabel:UILabel!
-    @IBOutlet weak var answerLabel:UILabel!
+    @IBOutlet var nextButton: UIButton!
+    @IBOutlet var questionLabel: UILabel!
+    @IBOutlet var answerLabel: UILabel!
     
     var isAnswered: Bool = false
     var wordArray = [Dictionary<String, String>]()
@@ -41,7 +41,7 @@ class QuestionViewController: UIViewController {
     }
     
     
-    func shuffle(){
+    func shuffle() {
         while wordArray.count > 0 {
             let index = Int(arc4random()) % wordArray.count
             shuffledWordArray.append(wordArray[index])
@@ -49,9 +49,9 @@ class QuestionViewController: UIViewController {
         }
     }
     
-    @IBAction func nextButtonPushed(){
+    @IBAction func nextButtonPushed() {
         
-        if isAnswered{
+        if isAnswered {
             nowNumber += 1
             answerLabel.text = ""
             
@@ -61,10 +61,10 @@ class QuestionViewController: UIViewController {
                 
                 nextButton.setTitle("答えを表示", for: UIControlState())
 
-            }else{
+            } else {
                 self.performSegue(withIdentifier: "toFinishView", sender: nil)
             }
-        }else{
+        } else {
             answerLabel.text = shuffledWordArray[nowNumber]["japanese"]
             isAnswered = true
             nextButton.setTitle("次へ", for: UIControlState())

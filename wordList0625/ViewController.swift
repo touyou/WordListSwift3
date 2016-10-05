@@ -21,14 +21,13 @@ class ViewController: UIViewController {
     }
 
     
-    @IBAction func back (_ segue:UIStoryboardSegue){
-        
+    @IBAction func back (_ segue:UIStoryboardSegue) {
     }
     
     @IBAction func startButtonTapped(){
         let saveData = UserDefaults.standard
         
-        if let wordArray = saveData.array(forKey: "WORD"){
+        if let wordArray = saveData.array(forKey: "WORD") {
             if wordArray.count > 0 {
                 self.performSegue(withIdentifier: "toQuestionView", sender: nil)
                 return
